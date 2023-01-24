@@ -5,13 +5,16 @@ dotnet new classlib -o $1
 rm $1/Class1.cs
 cp ../cs/Example/Example.cs $1/$1.cs
 sed -i -e 's/Example/'"$1"'/g' $1/$1.cs
+rm *.cs-e
 dotnet sln add $1/$1.csproj
 dotnet new nunit -o $1.Tests
 dotnet sln add $1.Tests/$1.Tests.csproj
 cd $1.Tests
 dotnet add reference ../$1/$1.csproj
 rm UnitTest1.cs
+rm Usings.cs
 cp ../../cs/Example.Tests/ExampleTests.cs "$1"Tests.cs
 sed -i -e 's/Example/'"$1"'/g' "$1"Tests.cs
+rm *.cs-e
 cd ..
 
